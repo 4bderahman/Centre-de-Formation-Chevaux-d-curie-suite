@@ -1,0 +1,20 @@
+1. 
+SELECT count(*) FROM chevauxdecurie.cheval where couleurCheval = 'Noir'; (ou like 'Noir')
+
+2. 
+SELECT count(*) FROM chevauxdecurie.cheval where NomRace like 'AngloArabe';
+
+3. 
+SELECT numCheval, NomCheval FROM chevauxdecurie.cheval where numTatouage='T0415';
+
+4. 
+SELECT Count(AnneeConcours) FROM chevauxdecurie.concours
+Where libelleConcours like 'Concours Dubai';
+
+5. 
+SELECT SUM(NbrParticipants) FROM chevauxdecurie.concours
+Where libelleConcours like '% Dubai';
+
+6. 
+SELECT libelleConcours, AnneeConcours FROM chevauxdecurie.participationconcours
+Where Place =1;
