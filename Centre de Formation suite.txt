@@ -1,0 +1,56 @@
+1. 
+select titreForm, nomsess,datedebut, datefin from formation
+inner join session on session.codeForm = formation.codeForm;
+
+2. 
+select titreForm, nomEtu, prenomEtu from inscription
+inner join etudiant on etudiant.numCINEtu = inscription.numCINEtu 
+inner join session on session.codesess = inscription.codeSess
+inner join formation on session.codeForm = formation.codeForm 
+order by titreForm;
+
+3. 
+Select TitreForm, TypeCours, count(numinscription) from inscription
+inner join session on session.codesess = inscription.codeSess 
+inner join formation on session.codeForm = formation.codeForm 
+WHERE titreForm like 'web developpment'
+group by TitreForm,TypeCours;
+
+4. 
+Select TitreForm, count(numinscription) from inscription
+inner join session on session.codesess = inscription.codeSess 
+inner join formation on session.codeForm = formation.codeForm 
+Where typeCours like 'Distanciel'
+group by TitreForm
+Having count(numinscription) >=3
+Order by count(numinscription);
+
+5. 
+Select nomSpec, titreForm, dureeForm, prixForm from specialite
+inner join catalogue on catalogue.codespec = specialite.codespec 
+inner join formation on formation.codeForm = catalogue.codeForm 
+where Active = 1
+Order by nomspec desc;
+
+6. 
+Select TitreForm, count(numinscription) from inscription
+inner join session on session.codesess = inscription.codeSess 
+inner join formation on session.codeForm = formation.codeForm 
+Where typeCours like 'Distanciel'
+group by TitreForm
+Having count(numinscription) >=3
+UNION ALL
+
+7. 
+Select TitreForm, count(numinscription) from inscription
+inner join session on session.codesess = inscription.codeSess 
+inner join formation on session.codeForm = formation.codeForm 
+Where typeCours like 'Presenciel'
+group by TitreForm
+Having count(numinscription) >=4);
+
+8. 
+Select Year(Datedebut),Month(dateDebut), count(numinscription) * PrixForm from inscription
+inner Join session on session.codesess = inscription.codeSess 
+inner join formation on session.codeForm = formation.codeForm 
+group by Year(Datedebut),Month(dateDebut)
